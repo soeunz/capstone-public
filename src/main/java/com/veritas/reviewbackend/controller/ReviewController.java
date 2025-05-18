@@ -1,5 +1,6 @@
 package com.veritas.reviewbackend.controller;
 
+import com.veritas.reviewbackend.dto.ApiResponse;
 import com.veritas.reviewbackend.dto.ReviewAnalyzeRequest;
 import com.veritas.reviewbackend.dto.ReviewAnalyzeResponse;
 import com.veritas.reviewbackend.service.ReviewService;
@@ -19,9 +20,10 @@ public class ReviewController {
     }
 
     @PostMapping("/analyze-reviews")
-    public ResponseEntity<ReviewAnalyzeResponse> analyze(@RequestBody @Valid ReviewAnalyzeRequest request) {
+    public ResponseEntity<ApiResponse<ReviewAnalyzeResponse>> analyze(
+            @RequestBody @Valid ReviewAnalyzeRequest request) {
         ReviewAnalyzeResponse response = reviewService.analyze(request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
 }
