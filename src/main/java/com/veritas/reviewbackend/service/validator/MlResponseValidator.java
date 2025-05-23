@@ -23,10 +23,6 @@ public class MlResponseValidator {
             if (response.reviewId() == null || response.reviewId().isBlank()) {
                 throw new CustomException(ErrorCode.INVALID_INPUT_VALUE, "리뷰 ID는 null이거나 빈 값일 수 없습니다.");
             }
-
-            if (response.score() < 0.0 || response.score() > 1.0) {
-                throw new CustomException(ErrorCode.INVALID_INPUT_VALUE, "score 값은 0.0 이상 1.0 이하여야 합니다.");
-            }
         }
     }
 

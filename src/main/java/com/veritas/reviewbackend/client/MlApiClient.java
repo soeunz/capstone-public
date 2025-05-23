@@ -52,7 +52,7 @@ public class MlApiClient {
         List<ReviewResponse> result = reviews.stream()
                 .map(review -> new ReviewResponse(
                         review.reviewId(),
-                        review.rating() < 3 ? 0.81 : 0.92
+                        review.rating() < 3
                 ))
                 .toList();
 
