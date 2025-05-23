@@ -23,6 +23,11 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	junitVersion = '5.11.0'
+	platformVersion = '1.11.0'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -33,9 +38,26 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testImplementation "org.junit.platform:junit-platform-launcher:${platformVersion}"
+	testImplementation "org.junit.platform:junit-platform-commons:${platformVersion}"
+	testImplementation "org.junit.platform:junit-platform-engine:${platformVersion}"
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+configurations.configureEach {
+	resolutionStrategy {
+		force "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+		force "org.junit.jupiter:junit-jupiter:${junitVersion}"
+		force "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+		force "org.junit.platform:junit-platform-launcher:${platformVersion}"
+		force "org.junit.platform:junit-platform-commons:${platformVersion}"
+		force "org.junit.platform:junit-platform-engine:${platformVersion}"
+	}
+}
+
