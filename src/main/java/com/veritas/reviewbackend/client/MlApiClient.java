@@ -43,6 +43,8 @@ public class MlApiClient {
 
     // 테스트용 더미 데이터
     public ReviewAnalyzeResponse sendForAnalysis(List<ReviewRequest> reviews) {
+        System.out.println("[ML 호출됨] 리뷰 개수: " + reviews.size());
+
         // 리뷰 리스트 -> JSONL 변환
         String requestJsonl = jsonlConverter.convertToJsonL(reviews);
         System.out.println("변환된 요청 JSONL");
